@@ -27,7 +27,7 @@ namespace Opg1og2.Tests
         }
 
         [TestMethod()]
-        [DataRow(5, "Test title", 1)]
+        [DataRow("Test title", 1)]
         public void AddTestOk(string title, double price)
         {
             // arrange
@@ -58,11 +58,6 @@ namespace Opg1og2.Tests
             
             // act & assert
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => repository.Add(bookToAdd));
-        }
-        [TestMethod()]
-        public void GetAllTest()
-        {
-            Assert.Fail();
         }
 
         [TestMethod()]
@@ -108,12 +103,6 @@ namespace Opg1og2.Tests
             Assert.IsNull(bookNotFound);
         }
 
-        [TestMethod()]
-        [DataRow(12)]
-        public void DeleteOKtest(int id)
-        {
-            Assert.Fail();      
-        }
         public void UpdateTest()
         {
             Assert.Fail();
