@@ -6,30 +6,30 @@ using System.Threading.Tasks;
 
 namespace Opg1og2
 {
-    public class BooksRepository
+    public class BooksRepository: IBooksRepository
     {
-        private readonly List<Book> books = new List<Book>();
+        private readonly List<Book> _books = new();
 
         public BooksRepository()
         {
-            books = new List<Book>();
-            books.Add(new Book() { Id = 1, Title = "Agile Samurai", Price = 500});
-            books.Add(new Book() { Id = 2, Title = "C# book", Price = 400 });
-            books.Add(new Book() { Id = 3, Title = "Javascript book", Price = 400 });
-            books.Add(new Book() { Id = 4, Title = "Python book", Price = 400 });
-            books.Add(new Book() { Id = 5, Title = "Network book", Price = 600 });
+            //books = new List<Book>();
+            _books.Add(new Book() { Id = 1, Title = "Agile Samurai", Price = 500});
+            _books.Add(new Book() { Id = 2, Title = "C# book", Price = 400 });
+            _books.Add(new Book() { Id = 3, Title = "Javascript book", Price = 400 });
+            _books.Add(new Book() { Id = 4, Title = "Python book", Price = 400 });
+            _books.Add(new Book() { Id = 5, Title = "Network book", Price = 600 });
         }
 
         public Book Add(Book book)
         {
             book.Validation();
-            books.Add(book);
+            _books.Add(book);
             return book;
         }
 
-        public IEnumerable<Book> Get(int? filtrerPrice, int? sortByPrice)
+        public IEnumerable<Book> GetAll(int? filtrerPrice = null, int? sortByPrice = null)
         {
-            IEnumerable<Book> books = new List<Book>();
+            IEnumerable<Book> books = new List<Book>(_books);
             if(filtrerPrice != null)
             {
                books = books.Where(book => book.Price > filtrerPrice);
@@ -43,7 +43,7 @@ namespace Opg1og2
 
         public Book GetById(int id)
         {
-            foreach(Book book in books)
+            foreach(Book book in _books)
             {
                 if(book.Id == id)
                 {
@@ -58,7 +58,7 @@ namespace Opg1og2
             Book book = GetById(id);
             if(book != null)
             {
-                books.Remove(book);
+                _books.Remove(book);
                 return book;
             }
             return null;
@@ -67,7 +67,7 @@ namespace Opg1og2
         public Book Update(int id, Book book)
         {
             book.Validation();
-            foreach (Book b in books)
+            foreach (Book b in _books)
             {
                 if(b.Id == id)
                 {

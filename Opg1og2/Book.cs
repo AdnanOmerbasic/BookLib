@@ -20,6 +20,7 @@ namespace Opg1og2
             {
                 throw new ArgumentOutOfRangeException($"Titlen skal være længere end 3 tegn: {Title}");
             }
+
         }
 
         public void ValidationPrice()
